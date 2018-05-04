@@ -1,14 +1,21 @@
 // initially based on this:
 // https://processing.org/discourse/beta/num_1138567834.html
 
+/*
+- Click and drag to warp (distortion is applied around the point where drag started).
+- Press 'a' to apply the distortion.
+- Press 'r' to reset to original image.
+*/
+
 PImage source, destination;
 
 float mX, mY;
 float deltaX, deltaY;
 float imgDiagonal;
+String imageFile = "img/IMG_20170429_214847.jpg";
 
 void settings() {
-  source = loadImage("img/IMG_20170429_214847.jpg");
+  source = loadImage(imageFile);
   size(source.width, source.height);
   imgDiagonal = dist(0, 0, source.width, source.height);
 }
@@ -19,6 +26,16 @@ void setup() {
 void draw() {
   destination = warp(source);
   image(destination, 0, 0);
+}
+
+void keyReleased(){
+  if(key == 'a'){
+    source = destination;
+  }
+  if(key == 'r'){
+    source = loadImage(imageFile);
+  }
+  destination = warp(source);
 }
 
 void mousePressed(){
