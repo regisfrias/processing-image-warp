@@ -7,12 +7,15 @@
 - Press 'r' to reset to original image.
 */
 
+// Add your images inside 'img' folder
+// then call it here:
+String imageFile = "img/img.jpg";
+
 PImage source, destination;
 
 float mX, mY;
 float deltaX, deltaY;
 float imgDiagonal;
-String imageFile = "img/IMG_20170429_214847.jpg";
 
 void settings() {
   source = loadImage(imageFile);
@@ -31,14 +34,17 @@ void draw() {
 void keyReleased(){
   if(key == 'a'){
     source = destination;
+    deltaX = 0;
+    deltaY = 0;
   }
   if(key == 'r'){
     source = loadImage(imageFile);
   }
-  destination = warp(source);
 }
 
 void mousePressed(){
+  deltaX = 0;
+  deltaY = 0;
   mX = mouseX;
   mY = mouseY;
 }
@@ -59,9 +65,11 @@ PImage warp(PImage source) {
       int newX = x;
       int newY = y;
       
-      float dist = map(dist(x, y, mX, mY), 0, imgDiagonal, 0, 1200);
-      //float dist = map(dist(x, y, mouseX, mouseY), 0, imgDiagonal, 0, 1200);
-      float amount = (cos(radians(dist))/2 + .5);
+      float dist = 0;
+      float amount = 0;
+    
+      dist = map(dist(x, y, mX, mY), 0, imgDiagonal, 0, 1200);
+      amount = (cos(radians(dist))/2 + .5);
       
       if(dist > 180 || dist < -180) {
         amount = 0;
