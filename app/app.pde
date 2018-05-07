@@ -1,6 +1,5 @@
 // initially based on this:
 // https://processing.org/discourse/beta/num_1138567834.html
-
 /*
 - Click and drag to warp (distortion is applied around the point where drag started).
 - Press 'a' to apply the distortion.
@@ -10,7 +9,6 @@
 // Add your images inside 'img' folder
 // then call it here:
 String imageFile = "img/img.jpg";
-
 PImage source, destination;
 
 float mX, mY;
@@ -18,7 +16,7 @@ float deltaX, deltaY;
 float imgDiagonal;
 
 void settings() {
-  source = loadImage(imageFile);
+  source = loadImage("img/img.jpg");
   size(source.width, source.height);
   imgDiagonal = dist(0, 0, source.width, source.height);
 }
